@@ -1,19 +1,28 @@
 package edu.polytech.channels.local;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BrokerManager {
 
+  static BrokerManager instance;
+
+  protected Map<String, CBroker> brokers = new HashMap<>();
 
   BrokerManager() {
+    instance = this;
   }
 
-  public void add(CBroker broker) {
+  public synchronized void add(CBroker broker) {
+    brokers.put(broker.getName(), broker);
   }
-  
-  public void remove(CBroker broker) {
+
+  public synchronized void remove(CBroker broker) {
+    brokers.remove(broker.getName());
   }
-  
-  public CBroker get(String name) {
-    return null;
+
+  public synchronized CBroker get(String name) {
+    return brokers.get(name);
   }
-  
+
 }

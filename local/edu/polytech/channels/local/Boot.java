@@ -12,12 +12,12 @@ public class Boot implements Bootstrap {
   
   @Override
   public Broker newBroker(String name) {
-    throw new RuntimeException("NYI");
+    return new CBroker(name);
   }
 
   @Override
   public Task newTask(Broker b, Runnable r, String name) {
-    throw new RuntimeException("NYI");
+    return new CTask(b, r, name);
   }
 
 }
